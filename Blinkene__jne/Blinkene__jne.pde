@@ -6,11 +6,11 @@ int WKnap = 100, HKnap = 110;
 
 //Boolean
 Boolean LightOn = false;
-Boolean LightOff = false;
 Boolean EyeOpenLight = false;
 Boolean EyeCloseLight = false;
 Boolean EyeOpenDark = false;
 Boolean EyeCloseDark = false;
+Boolean clicked = false;
 
 //Billede
 PImage Lamp;
@@ -20,9 +20,15 @@ void setup() {
   size(500, 500);
 
   Lamp = loadImage("Lamp.png");
+  
+  LightOn = true;
 }
 
 void draw() {
+  
+  if(mousePressed == false)
+  clicked = false;
+  
   //Lokale Variabler
   float EyeClose = random(0, 100);
 
@@ -49,7 +55,7 @@ void draw() {
       //Billede
       image(Lamp, 200, 150, 100, 100);
       stroke(253, 249, 39);
-      //Lys Stråler
+      //Lys Stråler Højre side
       line(300, 150, 350, 130);
       line(300, 175, 375, 155);
       line(302, 200, 375, 205);
@@ -58,7 +64,7 @@ void draw() {
       //Lys Stråler Venstre side
       line(200, 150, 150, 130);
       line(200, 175, 125, 155);
-      line(202, 200, 125, 205);
+      line(196, 200, 125, 205);
       line(200, 225, 150, 230);
 
       stroke(0);
@@ -98,7 +104,7 @@ void draw() {
       //Lys Stråler Venstre side
       line(200, 150, 150, 130);
       line(200, 175, 125, 155);
-      line(202, 200, 125, 205);
+      line(196, 200, 125, 205);
       line(200, 225, 150, 230);
 
       stroke(0);
@@ -107,21 +113,20 @@ void draw() {
     if (EyeClose > 92.5) {
       EyeOpenLight = false;
       EyeCloseLight = true;
-      println("If Lys Virker");
     } else {
       EyeOpenLight = true;
       EyeCloseLight = false;
     }
 
-    if (mousePressed) {
+    if ((mousePressed)&& (clicked==false)) {
       if (mouseX>XKnap && mouseX <XKnap+WKnap && mouseY>YKnap && mouseY <YKnap+HKnap) {
       LightOn = false;
-      LightOff = true;
+      clicked = true;
       }
     }
   }
 
-  if (LightOff) {
+  if (LightOn==false) {
 
     if (EyeOpenDark) {
       background(0);
@@ -161,10 +166,10 @@ void draw() {
       EyeOpenDark = true;
       EyeCloseDark = false;
     }
-     if (mousePressed) {
+     if ((mousePressed)&& (clicked == false)) {
       if (mouseX>XKnap && mouseX <XKnap+WKnap && mouseY>YKnap && mouseY <YKnap+HKnap) {
       LightOn = true;
-      LightOff = false;
+      clicked = true;
       }
     }
   }
