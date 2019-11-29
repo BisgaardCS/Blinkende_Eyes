@@ -1,5 +1,11 @@
 //Globale Variabler
 
+//Import af processing sound
+import processing.sound.*;
+
+//Lyde
+SoundFile Blink;
+
 //Knap Variabler
 int XKnap = 200, YKnap = 150;
 int WKnap = 100, HKnap = 110;
@@ -19,16 +25,22 @@ void setup() {
   //Lokale Variabler
   size(500, 500);
 
+  //Loading af billede
   Lamp = loadImage("Lamp.png");
-  
+
+  //For at gøre det true til at starte med
   LightOn = true;
+
+  //Musik
+  Blink = new SoundFile(this, "Blink.mp3");
+  Blink.amp(1);
 }
 
 void draw() {
-  
-  if(mousePressed == false)
-  clicked = false;
-  
+
+  if (mousePressed == false)
+    clicked = false;
+
   //Lokale Variabler
   float EyeClose = random(0, 100);
 
@@ -67,7 +79,11 @@ void draw() {
       line(196, 200, 125, 205);
       line(200, 225, 150, 230);
 
+      //Stroke farve
       stroke(0);
+
+      //Lyd effekt
+      Blink.play();
     }
 
     if (EyeOpenLight) {
@@ -120,8 +136,8 @@ void draw() {
 
     if ((mousePressed)&& (clicked==false)) {
       if (mouseX>XKnap && mouseX <XKnap+WKnap && mouseY>YKnap && mouseY <YKnap+HKnap) {
-      LightOn = false;
-      clicked = true;
+        LightOn = false;
+        clicked = true;
       }
     }
   }
@@ -157,19 +173,21 @@ void draw() {
 
       //Billede
       image(Lamp, 200, 150, 100, 100);
+
+      //Lyd effekt
+      Blink.play();
     }
     if (EyeClose > 92.5) {
       EyeOpenDark = false;
       EyeCloseDark = true;
-      println("If Dark Virker");
     } else {
       EyeOpenDark = true;
       EyeCloseDark = false;
     }
-     if ((mousePressed)&& (clicked == false)) {
+    if ((mousePressed)&& (clicked == false)) {
       if (mouseX>XKnap && mouseX <XKnap+WKnap && mouseY>YKnap && mouseY <YKnap+HKnap) {
-      LightOn = true;
-      clicked = true;
+        LightOn = true;
+        clicked = true;
       }
     }
   }
