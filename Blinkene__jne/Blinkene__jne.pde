@@ -126,7 +126,7 @@ void draw() {
       stroke(0);
     }
 
-    if (EyeClose > 92.5) {
+    if (EyeClose > 95) {
       EyeOpenLight = false;
       EyeCloseLight = true;
     } else {
@@ -177,7 +177,7 @@ void draw() {
       //Lyd effekt
       Blink.play();
     }
-    if (EyeClose > 92.5) {
+    if (EyeClose > 95) {
       EyeOpenDark = false;
       EyeCloseDark = true;
     } else {
